@@ -15,7 +15,5 @@
         "psr-4": {
             "Kryptonit3\\Sonarr\\": "src/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
