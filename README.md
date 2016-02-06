@@ -17,7 +17,7 @@ public function addSeries()
 {
     $sonarr = new Sonarr('http://127.0.0.1:8989', 'cf7544f71b6c4efcbb84b49011fc965c'); // URL and API Key
     
-    return $this->sonarr->postSeries([
+    return $sonarr->postSeries([
         'tvdbId' => 73739,
         'title' => 'Lost',
         'qualityProfileId' => 3, // HD-720p
