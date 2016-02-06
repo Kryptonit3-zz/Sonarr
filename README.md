@@ -39,3 +39,5 @@ public function mySeries()
    "runtimeVersion":"4.2.1 (Stable 4.2.1.102/6dd2d0d Mon Nov 30 14:47:31 CET 2015)"
 }
 ```
+
+For available methods reference included [Sonarr::class](src/Sonarr.php)
