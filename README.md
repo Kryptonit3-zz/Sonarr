@@ -8,7 +8,7 @@ Here is the Sonarr API Documentation that this package implements: https://githu
 use Kryptonit3\Sonarr\Sonarr;
 ```
 ```php
-public function mySeries()
+public function sonarrStatus()
 {
     $sonarr = new Sonarr('http://127.0.0.1:8989', 'cf7544f71b6c4efcbb84b49011fc965c');
     
