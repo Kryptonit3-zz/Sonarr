@@ -16,8 +16,6 @@ use Kryptonit3\Sonarr\Sonarr;
 public function addSeries()
 {
     $sonarr = new Sonarr('http://127.0.0.1:8989', 'cf7544f71b6c4efcbb84b49011fc965c'); // URL and API Key
-    // If your site requires HTTP Auth username and password you may supply it like this:
-    // $sonarr = new Sonarr('http://127.0.0.1:8989', 'cf7544f71b6c4efcbb84b49011fc965c', 'my-username', 'my-password');
     
     return $sonarr->postSeries([
         'tvdbId' => 73739,
@@ -27,6 +25,12 @@ public function addSeries()
     ]);
 }
 ```
+### HTTP Auth
+If your site requires HTTP Auth username and password you may supply it like this. Please note, if you are using HTTP Auth without SSL you are sending your username and password unprotected across the internet.
+```php
+$sonarr = new Sonarr('http://127.0.0.1:8989', 'cf7544f71b6c4efcbb84b49011fc965c', 'my-username', 'my-password');
+```
+
 ### Output
 ```json
 {
