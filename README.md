@@ -75,3 +75,5 @@ public function addSeries()
 ```
 
 For available methods reference included [Sonarr::class](src/Sonarr.php)
+
+Note: when posting data with key => value pairs, keys are case-sensitive.
