@@ -9,11 +9,15 @@ class Sonarr
 {
     protected $url;
     protected $apiKey;
+    protected $httpAuthUsername;
+    protected $httpAuthPassword;
 
-    public function __construct($url, $apiKey)
+    public function __construct($url, $apiKey, $httpAuthUsername = null, $httpAuthPassword = null)
     {
         $this->url = rtrim($url, '/\\'); // Example: http://127.0.0.1:8989 (no trailing forward-backward slashes)
         $this->apiKey = $apiKey;
+        $this->httpAuthUsername = $httpAuthUsername;
+        $this->httpAuthPassword = $httpAuthPassword;
     }
 
     /**
@@ -739,51 +743,43 @@ class Sonarr
     protected function _request(array $params)
     {
         $client = new Client();
+        $options = [
+            'headers' => [
+                'X-Api-Key' => $this->apiKey    
+            ]    
+        ];
+        
+        if ( $this->httpAuthUsername && $this->httpAuthPassword ) {
+            $options['auth'] = [
+                $this->httpAuthUsername,
+                $this->httpAuthPassword
+            ];
+        }
 
         if ( $params['type'] == 'get' ) {
             $url = $this->url . '/api/' . $params['uri'] . '?' . http_build_query($params['data']);
 
-            return $client->get($url,
-                [
-                    'headers' => [
-                        'X-Api-Key' => $this->apiKey
-                    ]
-                ]);
+            return $client->get($url, $options);
         }
 
         if ( $params['type'] == 'put' ) {
             $url = $this->url . '/api/' . $params['uri'];
-
-            return $client->put($url,
-                [
-                    'headers' => [
-                        'X-Api-Key' => $this->apiKey
-                    ],
-                    'json' => $params['data']
-                ]);
+            $options['json'] = $params['data'];
+            
+            return $client->put($url, $options);
         }
 
         if ( $params['type'] == 'post' ) {
             $url = $this->url . '/api/' . $params['uri'];
-
-            return $client->post($url,
-                [
-                    'headers' => [
-                        'X-Api-Key' => $this->apiKey
-                    ],
-                    'json' => $params['data']
-                ]);
+            $options['json'] = $params['data'];
+            
+            return $client->post($url, $options);
         }
 
         if ( $params['type'] == 'delete' ) {
             $url = $this->url . '/api/' . $params['uri'] . '?' . http_build_query($params['data']);
 
-            return $client->delete($url,
-                [
-                    'headers' => [
-                        'X-Api-Key' => $this->apiKey
-                    ]
-                ]);
+            return $client->delete($url, $options);
         }
     }
 
