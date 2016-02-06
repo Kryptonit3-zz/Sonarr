@@ -3,6 +3,11 @@ PHP Wrapper for Sonarr https://sonarr.tv
 
 Here is the Sonarr API Documentation that this package implements: https://github.com/Sonarr/Sonarr/wiki/API
 
+## Installation
+```ruby
+composer require kryptonit3/sonarr
+```
+
 ## Example Usage
 ```php
 use Kryptonit3\Sonarr\Sonarr;
