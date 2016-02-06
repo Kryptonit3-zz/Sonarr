@@ -46,7 +46,7 @@ public function addSeries()
     
   ],
   "year": 0,
-  "path": "\/volume1\/Plex\/Jesse\/Shows\/Lost",
+  "path": "\/volume1\/Plex\/Shows\/Lost",
   "profileId": 3,
   "seasonFolder": true,
   "monitored": true,
