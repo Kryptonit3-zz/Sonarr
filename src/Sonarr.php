@@ -22,28 +22,29 @@ class Sonarr
 
     /**
      * Gets upcoming episodes, if start/end are not supplied episodes airing today and tomorrow will be returned
-     * When supplying start and/or end date you must supply an array with date in format yyyy-mm-dd
-     * Example: $sonarr->getCalendar(['start' => '2015-01-25', 'end' => '2016-01-15']);
+     * When supplying start and/or end date you must supply date in format yyyy-mm-dd
+     * Example: $sonarr->getCalendar('2015-01-25', '2016-01-15');
      * 'start' and 'end' not required. You may supply, one or both.
      *
-     * @param array|null $data
+     * @param string|null $start
+     * @param string|null $end
      * @return array|object|string
      * @throws InvalidException
      */
-    public function getCalendar(array $data = null)
+    public function getCalendar($start = null, $end = null)
     {
         $uriData = [];
 
-        if ( is_array($data) && array_key_exists('start', $data) ) {
-            if ( $this->validateDate($data['start']) ) {
-                $uriData['start'] = $data['start'];
+        if ( $start ) {
+            if ( $this->validateDate($start) ) {
+                $uriData['start'] = $start;
             } else {
                 throw new InvalidException('Start date string was not recognized as a valid DateTime. Format must be yyyy-mm-dd.');
             }
         }
-        if ( is_array($data) && array_key_exists('end', $data) ) {
-            if ( $this->validateDate($data['end']) ) {
-                $uriData['end'] = $data['end'];
+        if ( $end ) {
+            if ( $this->validateDate($end) ) {
+                $uriData['end'] = $end;
             } else {
                 throw new InvalidException('End date string was not recognized as a valid DateTime. Format must be yyyy-mm-dd.');
             }
